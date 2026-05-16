@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENFADI — Servicio Integral de Salud en el Hogar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0C1B2A',
+              teal: '#0D9488',
+              tealdark: '#0F766E',
+              teallight: '#5EEAD4',
+              snow: '#F0FDFA',
+              ice: '#CCFBF1',
+              mint: '#ECFDF5'
+            }
+          },
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Oswald', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', 'sans-serif'; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F0FDFA; }
+    ::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 4px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .fade-in-up-delay-1 { animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0; }
+    .fade-in-up-delay-2 { animation: fadeInUp 0.8s ease-out 0.4s forwards; opacity: 0; }
+    .fade-in-up-delay-3 { animation: fadeInUp 0.8s ease-out 0.6s forwards; opacity: 0; }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    .pulse-ring::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid #0D9488;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee { animation: marquee 30s linear infinite; }
+  </style>
+</head>
+<body class="bg-brand-snow text-brand-navy">
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="fixed top-4 left-0 right-0 z-50 px-4">
+    <div class="max-w-6xl mx-auto bg-brand-navy rounded-2xl px-6 py-4 shadow-2xl flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-2">
+        <div class="h-9 w-9 rounded-full bg-brand-teal flex items-center justify-center">
+          <i data-lucide="heart-pulse" class="h-5 w-5 text-white"></i>
+        </div>
+        <span class="font-display text-white text-xl font-bold tracking-tight uppercase">Enfadi</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#servicios" class="text-white/70 hover:text-brand-teallight text-xs font-semibold tracking-widest uppercase transition-colors">Servicios</a>
+        <a href="#adulto-mayor" class="text-white/70 hover:text-brand-teallight text-xs font-semibold tracking-widest uppercase transition-colors">Adulto Mayor</a>
+        <a href="#nosotros" class="text-white/70 hover:text-brand-teallight text-xs font-semibold tracking-widest uppercase transition-colors">Nosotros</a>
+        <a href="#equipo" class="text-white/70 hover:text-brand-teallight text-xs font-semibold tracking-widest uppercase transition-colors">Equipo</a>
+        <a href="#testimonios" class="text-white/70 hover:text-brand-teallight text-xs font-semibold tracking-widest uppercase transition-colors">Testimonios</a>
+        <a href="#contacto" class="bg-brand-teal hover:bg-brand-tealdark text-white text-xs font-semibold tracking-wider uppercase px-5 py-2.5 rounded-xl transition-colors">Contáctenos</a>
+      </div>
+      <button id="menuBtn" class="md:hidden text-white">
+        <i data-lucide="menu" class="h-6 w-6"></i>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden max-w-6xl mx-auto bg-brand-navy rounded-2xl mt-2 px-6 py-4 shadow-2xl md:hidden">
+      <div class="flex flex-col gap-4">
+        <a href="#servicios" class="text-white/70 hover:text-brand-teallight text-sm font-semibold tracking-wider uppercase transition-colors mobile-link">Servicios</a>
+        <a href="#adulto-mayor" class="text-white/70 hover:text-brand-teallight text-sm font-semibold tracking-wider uppercase transition-colors mobile-link">Adulto Mayor</a>
+        <a href="#nosotros" class="text-white/70 hover:text-brand-teallight text-sm font-semibold tracking-wider uppercase transition-colors mobile-link">Nosotros</a>
+        <a href="#equipo" class="text-white/70 hover:text-brand-teallight text-sm font-semibold tracking-wider uppercase transition-colors mobile-link">Equipo</a>
+        <a href="#testimonios" class="text-white/70 hover:text-brand-teallight text-sm font-semibold tracking-wider uppercase transition-colors mobile-link">Testimonios</a>
+        <a href="#contacto" class="bg-brand-teal hover:bg-brand-tealdark text-white text-sm font-semibold tracking-wider uppercase px-5 py-3 rounded-xl transition-colors text-center mobile-link">Contáctenos</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center bg-brand-navy overflow-hidden pt-32 pb-20 px-4">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-teal/10 rounded-full blur-[128px]"></div>
+      <div class="absolute top-1/4 right-1/4 w-[300px] h-[300px] bg-teal-800/10 rounded-full blur-[100px]"></div>
+      <!-- Background image overlay -->
+      <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80" alt="" class="absolute inset-0 w-full h-full object-cover opacity-10">
+    </div>
+
+    <div class="relative z-10 text-center max-w-5xl mx-auto">
+      <div class="fade-in-up">
+        <span class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-6">
+          <span class="relative h-2 w-2 rounded-full bg-brand-teallight pulse-ring"></span>
+          <span class="text-white/60 text-[10px] font-semibold tracking-[0.2em] uppercase">Donde el bienestar es nuestra misión</span>
+        </span>
+      </div>
+
+      <h1 class="font-display text-5xl sm:text-7xl lg:text-[8rem] font-semibold text-white leading-[0.85] tracking-tighter uppercase fade-in-up-delay-1">
+        Salud<br>
+        <span class="text-brand-teallight">En Casa</span>
+      </h1>
+
+      <p class="text-white/60 text-base sm:text-lg max-w-2xl mx-auto mt-8 leading-relaxed fade-in-up-delay-2">
+        En <strong class="text-white">ENFADI</strong> brindamos servicio integral de salud a domicilio. Equipo completo de médicos, enfermeras, asistentes y cuidadores para usted o su familiar.
+      </p>
+
+      <div class="fade-in-up-delay-2 mt-6">
+        <span class="inline-flex items-center gap-2 bg-brand-teal/20 border border-brand-teal/30 rounded-full px-5 py-2.5">
+          <i data-lucide="badge-check" class="h-4 w-4 text-brand-teallight"></i>
+          <span class="text-brand-teallight text-xs font-semibold tracking-wider uppercase">Visita de Valoración y Cotización Gratuita</span>
+        </span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 fade-in-up-delay-3">
+        <a href="#contacto" class="bg-brand-teal hover:bg-brand-tealdark text-white text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl transition-colors shadow-lg shadow-teal-900/20 flex items-center gap-2">
+          <i data-lucide="phone" class="h-4 w-4"></i>
+          Solicitar Valoración Gratis
+        </a>
+        <a href="#servicios" class="bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl transition-colors flex items-center gap-2">
+          <i data-lucide="list" class="h-4 w-4"></i>
+          Ver Servicios
+        </a>
+      </div>
+    </div>
+
+    <div class="relative z-10 mt-16 w-full max-w-4xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+          <div class="font-display text-3xl sm:text-4xl font-bold text-brand-teallight">500+</div>
+          <div class="text-white/50 text-xs font-semibold tracking-wider uppercase mt-2">Pacientes Atendidos</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+          <div class="font-display text-3xl sm:text-4xl font-bold text-brand-teallight">24/7</div>
+          <div class="text-white/50 text-xs font-semibold tracking-wider uppercase mt-2">Atención Continua</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+          <div class="font-display text-3xl sm:text-4xl font-bold text-brand-teallight">100%</div>
+          <div class="text-white/50 text-xs font-semibold tracking-wider uppercase mt-2">Personal Certificado</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+          <div class="font-display text-3xl sm:text-4xl font-bold text-brand-teallight">Gratis</div>
+          <div class="text-white/50 text-xs font-semibold tracking-wider uppercase mt-2">Valoración y Cotización</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <i data-lucide="chevron-down" class="h-5 w-5 text-white/30"></i>
+    </div>
+  </section>
+
+  <!-- ========== SERVICE MARQUEE ========== -->
+  <div class="bg-brand-teal py-3 overflow-hidden">
+    <div class="flex animate-marquee whitespace-nowrap">
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="stethoscope" class="h-3.5 w-3.5"></i> Médico General</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="heart-pulse" class="h-3.5 w-3.5"></i> Enfermería Domiciliaria</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="user-check" class="h-3.5 w-3.5"></i> Asistentes de Pacientes</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="hand-heart" class="h-3.5 w-3.5"></i> Cuidadores</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="brain" class="h-3.5 w-3.5"></i> Bienestar Mental</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="baby" class="h-3.5 w-3.5"></i> Cuidado Geriátrico</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="clipboard-check" class="h-3.5 w-3.5"></i> Consultas Pediátricas</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="file-text" class="h-3.5 w-3.5"></i> Certificados Médicos</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="stethoscope" class="h-3.5 w-3.5"></i> Médico General</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="heart-pulse" class="h-3.5 w-3.5"></i> Enfermería Domiciliaria</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="user-check" class="h-3.5 w-3.5"></i> Asistentes de Pacientes</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="hand-heart" class="h-3.5 w-3.5"></i> Cuidadores</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="brain" class="h-3.5 w-3.5"></i> Bienestar Mental</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="baby" class="h-3.5 w-3.5"></i> Cuidado Geriátrico</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="clipboard-check" class="h-3.5 w-3.5"></i> Consultas Pediátricas</span>
+      <span class="mx-8 text-white/90 text-xs font-semibold tracking-widest uppercase flex items-center gap-2"><i data-lucide="file-text" class="h-3.5 w-3.5"></i> Certificados Médicos</span>
+    </div>
+  </div>
+
+  <!-- ========== SERVICIOS ========== -->
+  <section id="servicios" class="py-24 px-4 sm:px-8 bg-brand-snow">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-brand-teal text-[10px] font-semibold tracking-[0.2em] uppercase">Equipo completo para cuidado en casa</span>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tighter uppercase mt-3 text-brand-navy">Nuestros Servicios</h2>
+        <p class="text-brand-navy/60 text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+          Servicio médico integral a domicilio. Atención por horas o en horario a convenir, adaptándonos a las necesidades de cada paciente.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Médico General -->
+        <div class="group bg-white rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="h-14 w-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 group-hover:bg-brand-teal transition-colors duration-300">
+            <i data-lucide="stethoscope" class="h-7 w-7 text-brand-teal group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold tracking-tight uppercase mb-3 text-brand-navy">Médico General</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed">Consultas médicas pediátricas y de adultos, visitas domiciliarias, certificados médicos y evaluaciones generales en la comodidad de su hogar.</p>
+        </div>
+
+        <!-- Enfermería -->
+        <div class="group bg-white rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="h-14 w-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 group-hover:bg-brand-teal transition-colors duration-300">
+            <i data-lucide="heart-pulse" class="h-7 w-7 text-brand-teal group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold tracking-tight uppercase mb-3 text-brand-navy">Profesional de Enfermería</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed">Servicio integral de enfermería a domicilio: curaciones, administración de medicamentos, inyecciones, control de signos vitales y procedimientos especializados.</p>
+        </div>
+
+        <!-- Asistentes -->
+        <div class="group bg-white rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="h-14 w-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 group-hover:bg-brand-teal transition-colors duration-300">
+            <i data-lucide="user-check" class="h-7 w-7 text-brand-teal group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold tracking-tight uppercase mb-3 text-brand-navy">Asistentes de Pacientes</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed">Apoyo personalizado en actividades diarias, movilidad, higiene y compañía. Atención humanizada con calidez y respeto por la dignidad del paciente.</p>
+        </div>
+
+        <!-- Cuidadores -->
+        <div class="group bg-white rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="h-14 w-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 group-hover:bg-brand-teal transition-colors duration-300">
+            <i data-lucide="hand-heart" class="h-7 w-7 text-brand-teal group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold tracking-tight uppercase mb-3 text-brand-navy">Cuidadores</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed">Cuidado integral y humanizado con acompañamiento continuo. Nuestros cuidadores brindan contención emocional y asistencia permanente al paciente.</p>
+        </div>
+
+        <!-- Bienestar Mental -->
+        <div class="group bg-white rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="h-14 w-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 group-hover:bg-brand-teal transition-colors duration-300">
+            <i data-lucide="brain" class="h-7 w-7 text-brand-teal group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold tracking-tight uppercase mb-3 text-brand-navy">Bienestar Mental y Emocional</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed">La salud mental y emocional es parte clave del bienestar integral. Nuestro equipo brinda contención, apoyo emocional y estrategias de afrontamiento.</p>
+        </div>
+
+        <!-- Horario Flexible -->
+        <div class="group bg-white rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="h-14 w-14 rounded-2xl bg-brand-teal/10 flex items-center justify-center mb-6 group-hover:bg-brand-teal transition-colors duration-300">
+            <i data-lucide="clock" class="h-7 w-7 text-brand-teal group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-display text-xl font-semibold tracking-tight uppercase mb-3 text-brand-navy">Servicios por Horas o 24/7</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed">Servicios por horas o en horario a convenir según sus necesidades. Atención las 24 horas, los 7 días de la semana para urgencias y cuidado continuo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ADULTO MAYOR ========== -->
+  <section id="adulto-mayor" class="py-24 px-4 sm:px-8 bg-brand-navy relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-brand-teal/5 rounded-full blur-[128px]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Image: Elderly care -->
+        <div class="relative">
+          <div class="rounded-[2rem] overflow-hidden border-2 border-brand-navy shadow-[-8px_8px_0px_0px_rgba(13,148,136,0.8)]">
+            <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=700&h=500&fit=crop&q=80" alt="Cuidado de adulto mayor a domicilio - profesional de salud atendiendo paciente geriátrico en su hogar" class="w-full h-auto object-cover">
+          </div>
+          <!-- 24/7 Badge -->
+          <div class="absolute -top-4 -right-4 sm:-right-6 bg-brand-teal text-white rounded-2xl p-4 shadow-xl animate-float">
+            <div class="text-center">
+              <div class="font-display text-2xl font-bold">24/7</div>
+              <div class="text-white/80 text-[9px] font-semibold tracking-wider uppercase">Atención Continua</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div>
+          <span class="text-brand-teallight text-[10px] font-semibold tracking-[0.2em] uppercase">Servicio especializado</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold text-white tracking-tighter uppercase mt-3 leading-[1]">Cuidado de Adulto Mayor a Domicilio</h2>
+          <div class="w-16 h-1 bg-brand-teal rounded mt-6"></div>
+          <p class="text-white/60 text-base leading-relaxed mt-6">
+            En <strong class="text-white">ENFADI</strong> comprendemos que los adultos mayores merecen una atención integral y personalizada que respete su dignidad y autonomía. Nuestro equipo de profesionales brinda cuidado médico, de enfermería y acompañamiento emocional en la comodidad de su hogar.
+          </p>
+
+          <div class="space-y-4 mt-8">
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teallight"></i>
+              </div>
+              <div>
+                <span class="text-white font-semibold text-sm">Atención las 24 horas</span>
+                <p class="text-white/50 text-xs mt-0.5">Cuidado continuo y permanente, sin interrupciones</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teallight"></i>
+              </div>
+              <div>
+                <span class="text-white font-semibold text-sm">Cuidado integral y personalizado</span>
+                <p class="text-white/50 text-xs mt-0.5">Plan de cuidado adaptado a cada paciente</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teallight"></i>
+              </div>
+              <div>
+                <span class="text-white font-semibold text-sm">Equipo completo: médico, enfermera, cuidador</span>
+                <p class="text-white/50 text-xs mt-0.5">Todos los profesionales en un solo servicio</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teallight"></i>
+              </div>
+              <div>
+                <span class="text-white font-semibold text-sm">Contención emocional y acompañamiento</span>
+                <p class="text-white/50 text-xs mt-0.5">Porque el bienestar mental es tan importante como el físico</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teallight"></i>
+              </div>
+              <div>
+                <span class="text-white font-semibold text-sm">Valoración y cotización gratuita</span>
+                <p class="text-white/50 text-xs mt-0.5">Sin compromiso, evaluamos sus necesidades sin costo</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="#contacto" class="inline-flex items-center gap-2 bg-brand-teal hover:bg-brand-tealdark text-white text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl transition-colors mt-8 shadow-lg shadow-teal-900/20">
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            Solicitar Valoración Gratuita
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BIENESTAR MENTAL ========== -->
+  <section class="py-24 px-4 sm:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1">
+          <span class="text-brand-teal text-[10px] font-semibold tracking-[0.2em] uppercase">Salud integral</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tighter uppercase mt-3 text-brand-navy leading-[1]">Bienestar Mental y Emocional</h2>
+          <div class="w-16 h-1 bg-brand-teal rounded mt-6"></div>
+          <p class="text-brand-navy/60 text-base leading-relaxed mt-6">
+            La salud mental y emocional es una parte clave del bienestar general. Enfrentar los desafíos de la vida, expresar emociones y construir relaciones saludables son fundamentales para una vida plena.
+          </p>
+          <p class="text-brand-navy/60 text-base leading-relaxed mt-4">
+            Nuestros profesionales de enfermería y cuidadores no solo atienden las necesidades físicas del paciente, sino que también proporcionan <strong class="text-brand-navy">acompañamiento emocional, escucha activa y contención</strong>, contribuyendo significativamente a la recuperación y calidad de vida.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 mt-8">
+            <div class="bg-brand-snow rounded-2xl p-5 text-center">
+              <i data-lucide="heart" class="h-6 w-6 text-brand-teal mx-auto mb-2"></i>
+              <div class="text-brand-navy text-sm font-semibold">Contención Emocional</div>
+            </div>
+            <div class="bg-brand-snow rounded-2xl p-5 text-center">
+              <i data-lucide="message-circle" class="h-6 w-6 text-brand-teal mx-auto mb-2"></i>
+              <div class="text-brand-navy text-sm font-semibold">Escucha Activa</div>
+            </div>
+            <div class="bg-brand-snow rounded-2xl p-5 text-center">
+              <i data-lucide="users" class="h-6 w-6 text-brand-teal mx-auto mb-2"></i>
+              <div class="text-brand-navy text-sm font-semibold">Acompañamiento</div>
+            </div>
+            <div class="bg-brand-snow rounded-2xl p-5 text-center">
+              <i data-lucide="sparkles" class="h-6 w-6 text-brand-teal mx-auto mb-2"></i>
+              <div class="text-brand-navy text-sm font-semibold">Calidad de Vida</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image: Mental wellness / emotional care -->
+        <div class="order-1 lg:order-2 relative">
+          <div class="rounded-[2rem] overflow-hidden border border-brand-navy/5 shadow-xl">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88cc466?w=700&h=600&fit=crop&q=80" alt="Bienestar mental y emocional - profesional de salud brindando apoyo emocional a paciente" class="w-full h-auto object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CITA NIGHTINGALE ========== -->
+  <section class="py-20 px-4 sm:px-8 bg-brand-teal relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px]"></div>
+    </div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <i data-lucide="quote" class="h-10 w-10 text-white/20 mx-auto mb-6"></i>
+      <blockquote class="font-display text-2xl sm:text-4xl lg:text-5xl text-white font-light tracking-tight leading-tight italic">
+        "Vive la vida mientras la tengas. La vida es un regalo espléndido, no hay nada pequeño en ella."
+      </blockquote>
+      <div class="mt-6 flex items-center justify-center gap-3">
+        <div class="w-12 h-[1px] bg-white/30"></div>
+        <span class="text-white/80 text-sm font-semibold tracking-wider uppercase">Florence Nightingale</span>
+        <div class="w-12 h-[1px] bg-white/30"></div>
+      </div>
+      <p class="text-white/60 text-sm mt-4 max-w-xl mx-auto">
+        Inspirados por la pionera de la enfermería moderna, en ENFADI creemos que cada momento de la vida merece ser vivido con dignidad y cuidado.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SOBRE NOSOTROS ========== -->
+  <section id="nosotros" class="py-24 px-4 sm:px-8 bg-brand-snow">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Image: Healthcare team -->
+        <div class="relative">
+          <div class="rounded-[2rem] overflow-hidden border-2 border-brand-navy/5 shadow-xl">
+            <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=700&h=500&fit=crop&q=80" alt="Equipo de profesionales de salud de ENFADI - enfermeras y cuidadores trabajando juntos" class="w-full h-auto object-cover">
+          </div>
+          <div class="absolute -bottom-6 -right-4 sm:right-8 bg-white rounded-2xl p-5 shadow-xl animate-float">
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-brand-teal/10 flex items-center justify-center">
+                <i data-lucide="shield-check" class="h-6 w-6 text-brand-teal"></i>
+              </div>
+              <div>
+                <div class="font-display text-2xl font-bold text-brand-navy">100%</div>
+                <div class="text-brand-navy/50 text-[10px] font-semibold tracking-wider uppercase">Personal Certificado</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-brand-teal text-[10px] font-semibold tracking-[0.2em] uppercase">Sobre Nosotros</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tighter uppercase mt-3 text-brand-navy leading-[1]">Donde el Bienestar es Nuestra Misión</h2>
+          <div class="w-16 h-1 bg-brand-teal rounded mt-6"></div>
+          <p class="text-brand-navy/60 text-base leading-relaxed mt-6">
+            En <strong class="text-brand-navy">ENFADI</strong> nos especializamos en servicios de salud en el hogar, brindando atención personalizada y profesional a cada paciente. Nuestro equipo está conformado por médicos generales, profesionales de enfermería, asistentes de pacientes y cuidadores.
+          </p>
+          <p class="text-brand-navy/60 text-base leading-relaxed mt-4">
+            Nuestra misión es garantizar el bienestar y la salud de nuestros pacientes, proporcionando cuidados de calidad en la comodidad de su hogar, porque creemos que la recuperación es más efectiva en un entorno familiar y rodeado de seres queridos.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 mt-8">
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teal"></i>
+              </div>
+              <span class="text-brand-navy/70 text-sm">Profesionales certificados</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teal"></i>
+              </div>
+              <span class="text-brand-navy/70 text-sm">Atención personalizada</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teal"></i>
+              </div>
+              <span class="text-brand-navy/70 text-sm">Disponibilidad 24/7</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teal"></i>
+              </div>
+              <span class="text-brand-navy/70 text-sm">Cotización gratuita</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teal"></i>
+              </div>
+              <span class="text-brand-navy/70 text-sm">Calidad y confianza</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="h-8 w-8 rounded-lg bg-brand-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="check" class="h-4 w-4 text-brand-teal"></i>
+              </div>
+              <span class="text-brand-navy/70 text-sm">Servicio por horas o completo</span>
+            </div>
+          </div>
+
+          <a href="#contacto" class="inline-flex items-center gap-2 bg-brand-teal hover:bg-brand-tealdark text-white text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl transition-colors mt-8 shadow-lg shadow-teal-900/20">
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            Contáctenos Ahora
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CÓMO FUNCIONA ========== -->
+  <section class="py-24 px-4 sm:px-8 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-brand-teal text-[10px] font-semibold tracking-[0.2em] uppercase">Proceso simple</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tighter uppercase mt-3 text-brand-navy">¿Cómo Funciona?</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <div class="hidden md:block absolute top-16 left-[20%] right-[20%] h-[2px] bg-brand-teal/20"></div>
+
+        <!-- Step 1 with image -->
+        <div class="text-center relative">
+          <div class="h-16 w-16 rounded-full bg-brand-teal text-white flex items-center justify-center mx-auto font-display text-2xl font-bold relative z-10">1</div>
+          <div class="mt-6 rounded-2xl overflow-hidden h-40 mb-4">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=200&fit=crop&q=80" alt="Contáctenos - profesional de salud atendiendo llamada" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-display text-lg font-semibold tracking-tight uppercase text-brand-navy">Contáctenos</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed mt-2">Llámenos al (506) 7151-3147 o escriba a info@enfadi.com. Le atenderemos de inmediato.</p>
+        </div>
+
+        <!-- Step 2 with image -->
+        <div class="text-center relative">
+          <div class="h-16 w-16 rounded-full bg-brand-teal text-white flex items-center justify-center mx-auto font-display text-2xl font-bold relative z-10">2</div>
+          <div class="mt-6 rounded-2xl overflow-hidden h-40 mb-4">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=200&fit=crop&q=80" alt="Valoración gratuita - evaluación médica domiciliaria" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-display text-lg font-semibold tracking-tight uppercase text-brand-navy">Valoración Gratuita</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed mt-2">Realizamos una visita de valoración sin costo y le brindamos una cotización personalizada.</p>
+        </div>
+
+        <!-- Step 3 with image -->
+        <div class="text-center relative">
+          <div class="h-16 w-16 rounded-full bg-brand-teal text-white flex items-center justify-center mx-auto font-display text-2xl font-bold relative z-10">3</div>
+          <div class="mt-6 rounded-2xl overflow-hidden h-40 mb-4">
+            <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=400&h=200&fit=crop&q=80" alt="Atención en casa - enfermera cuidando paciente en el hogar" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-display text-lg font-semibold tracking-tight uppercase text-brand-navy">Atención en Casa</h3>
+          <p class="text-brand-navy/60 text-sm leading-relaxed mt-2">Asignamos al profesional adecuado y comenzamos la atención por horas o 24/7 según lo necesario.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EQUIPO ========== -->
+  <section id="equipo" class="py-24 px-4 sm:px-8 bg-brand-snow">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-brand-teal text-[10px] font-semibold tracking-[0.2em] uppercase">Equipo completo para cuidado en casa</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tighter uppercase mt-3 text-brand-navy">Nuestro Equipo</h2>
+        <p class="text-brand-navy/60 text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+          Contamos con médicos, enfermeras, asistentes y cuidadores altamente calificados y comprometidos con la excelencia.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Médico General -->
+        <div class="group">
+          <div class="rounded-[2rem] overflow-hidden bg-gray-100 aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=530&fit=crop&crop=face&q=80" alt="Médico general de ENFADI con estetoscopio - consulta médica domiciliaria" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              <div class="flex gap-2">
+                <a href="tel:+50671513147" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="phone" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+                <a href="mailto:info@enfadi.com" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="mail" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-center">
+            <h3 class="font-display text-lg font-semibold tracking-tight uppercase text-brand-navy">Médico General</h3>
+            <p class="text-brand-teal text-xs font-semibold tracking-wider uppercase mt-1">Consultas y Visitas Domiciliarias</p>
+          </div>
+        </div>
+
+        <!-- Enfermería -->
+        <div class="group">
+          <div class="rounded-[2rem] overflow-hidden bg-gray-100 aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=530&fit=crop&crop=face&q=80" alt="Profesional de enfermería de ENFADI - servicio de enfermería a domicilio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              <div class="flex gap-2">
+                <a href="tel:+50671513147" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="phone" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+                <a href="mailto:info@enfadi.com" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="mail" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-center">
+            <h3 class="font-display text-lg font-semibold tracking-tight uppercase text-brand-navy">Enfermería</h3>
+            <p class="text-brand-teal text-xs font-semibold tracking-wider uppercase mt-1">Profesionales de Enfermería</p>
+          </div>
+        </div>
+
+        <!-- Asistentes -->
+        <div class="group">
+          <div class="rounded-[2rem] overflow-hidden bg-gray-100 aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964ac31?w=400&h=530&fit=crop&crop=face&q=80" alt="Asistente de pacientes de ENFADI - asistencia personalizada en el hogar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              <div class="flex gap-2">
+                <a href="tel:+50671513147" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="phone" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+                <a href="mailto:info@enfadi.com" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="mail" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-center">
+            <h3 class="font-display text-lg font-semibold tracking-tight uppercase text-brand-navy">Asistentes</h3>
+            <p class="text-brand-teal text-xs font-semibold tracking-wider uppercase mt-1">Asistentes de Pacientes</p>
+          </div>
+        </div>
+
+        <!-- Cuidadores -->
+        <div class="group">
+          <div class="rounded-[2rem] overflow-hidden bg-gray-100 aspect-[3/4] relative">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88cc466?w=400&h=530&fit=crop&crop=face&q=80" alt="Cuidadora de ENFADI - cuidado y acompañamiento de pacientes en casa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              <div class="flex gap-2">
+                <a href="tel:+50671513147" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="phone" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+                <a href="mailto:info@enfadi.com" class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-brand-teal transition-colors">
+                  <i data-lucide="mail" class="h-3.5 w-3.5 text-white"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-center">
+            <h3 class="font-display text-lg font-semibold tracking-tight uppercase text-brand-navy">Cuidadores</h3>
+            <p class="text-brand-teal text-xs font-semibold tracking-wider uppercase mt-1">Acompañamiento y Cuidado</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIOS ========== -->
+  <section id="testimonios" class="py-24 px-4 sm:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-brand-teal text-[10px] font-semibold tracking-[0.2em] uppercase">Testimonios</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tighter uppercase mt-3 text-brand-navy">Lo Que Dicen Nuestros Pacientes</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div class="bg-brand-snow rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+          </div>
+          <p class="text-brand-navy/60 text-sm leading-relaxed mb-6">"Gracias a ENFADI mi mamá pudo quedarse en casa con toda la atención que necesitaba. La enfermera y la cuidadora fueron increíbles, siempre atentas y muy profesionales."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1594824476967-48c8b964ac31?w=80&h=80&fit=crop&crop=face&q=80" alt="Ana López" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <div class="font-semibold text-sm text-brand-navy">Ana López</div>
+              <div class="text-brand-navy/40 text-xs">Familiar de paciente</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-brand-snow rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+          </div>
+          <p class="text-brand-navy/60 text-sm leading-relaxed mb-6">"El médico general hizo una visita a domicilio y fue muy completo. También me ayudaron con los certificados médicos. El servicio por horas se adaptó perfecto a mi presupuesto."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=80&h=80&fit=crop&crop=face&q=80" alt="José Ramírez" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <div class="font-semibold text-sm text-brand-navy">José Ramírez</div>
+              <div class="text-brand-navy/40 text-xs">Paciente</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-brand-snow rounded-[2rem] p-8 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+            <i data-lucide="star" class="h-4 w-4 text-brand-teal fill-brand-teal"></i>
+          </div>
+          <p class="text-brand-navy/60 text-sm leading-relaxed mb-6">"La atención 24/7 nos dio una tranquilidad inmensa. El cuidador no solo atendió a mi papá físicamente, también le brindó un apoyo emocional que necesitaba mucho."</p>
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88cc466?w=80&h=80&fit=crop&crop=face&q=80" alt="Carmen Morales" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <div class="font-semibold text-sm text-brand-navy">Carmen Morales</div>
+              <div class="text-brand-navy/40 text-xs">Familiar de paciente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA BANNER ========== -->
+  <section class="py-16 px-4 sm:px-8 bg-brand-teal relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-1/4 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px]"></div>
+      <div class="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-white/5 rounded-full blur-[80px]"></div>
+    </div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <h2 class="font-display text-3xl sm:text-5xl font-semibold text-white tracking-tighter uppercase">¿Necesita Cuidado para un Familiar en Casa?</h2>
+      <p class="text-white/80 text-base sm:text-lg mt-4 max-w-2xl mx-auto">Visita de valoración y cotización gratuita. Estamos disponibles las 24 horas para brindarle la atención que necesita.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+        <a href="tel:+50671513147" class="bg-white text-brand-tealdark text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl hover:bg-white/90 transition-colors flex items-center gap-2 shadow-lg">
+          <i data-lucide="phone" class="h-4 w-4"></i>
+          (506) 7151-3147
+        </a>
+        <a href="tel:+50689329031" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl transition-colors flex items-center gap-2">
+          <i data-lucide="phone-call" class="h-4 w-4"></i>
+          8932-9031
+        </a>
+        <a href="mailto:info@enfadi.com" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl transition-colors flex items-center gap-2">
+          <i data-lucide="mail" class="h-4 w-4"></i>
+          info@enfadi.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTO ========== -->
+  <section id="contacto" class="py-24 px-4 sm:px-8 bg-brand-navy relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-teal/5 rounded-full blur-[128px]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div>
+          <span class="text-brand-teallight text-[10px] font-semibold tracking-[0.2em] uppercase">Contáctenos</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold text-white tracking-tighter uppercase mt-3 leading-[1]">Estamos Para Ayudarle</h2>
+          <div class="w-16 h-1 bg-brand-teal rounded mt-6"></div>
+          <p class="text-white/60 text-base leading-relaxed mt-6">
+            No dude en comunicarse con nosotros. Le ofrecemos una visita de valoración y cotización sin costo. Nuestro equipo está listo para atenderle.
+          </p>
+
+          <div class="space-y-6 mt-8">
+            <div class="flex items-start gap-4">
+              <div class="h-12 w-12 rounded-2xl bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="phone" class="h-5 w-5 text-brand-teallight"></i>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm">Teléfonos</div>
+                <a href="tel:+50671513147" class="text-white/60 hover:text-brand-teallight text-sm transition-colors block">(506) 7151-3147</a>
+                <a href="tel:+50689329031" class="text-white/60 hover:text-brand-teallight text-sm transition-colors block">8932-9031</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="h-12 w-12 rounded-2xl bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="mail" class="h-5 w-5 text-brand-teallight"></i>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm">Correo Electrónico</div>
+                <a href="mailto:info@enfadi.com" class="text-white/60 hover:text-brand-teallight text-sm transition-colors">info@enfadi.com</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="h-12 w-12 rounded-2xl bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="globe" class="h-5 w-5 text-brand-teallight"></i>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm">Sitio Web</div>
+                <span class="text-white/60 text-sm">enfadi.cr</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="h-12 w-12 rounded-2xl bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="clock" class="h-5 w-5 text-brand-teallight"></i>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm">Horario de Atención</div>
+                <p class="text-white/60 text-sm">24 horas, 7 días a la semana</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="h-12 w-12 rounded-2xl bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="map-pin" class="h-5 w-5 text-brand-teallight"></i>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm">Ubicación</div>
+                <p class="text-white/60 text-sm">Costa Rica</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-[2rem] p-8 sm:p-10">
+          <form id="contactForm" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="text-white/50 text-xs font-semibold tracking-wider uppercase block mb-2">Nombre</label>
+                <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/30 focus:outline-none focus:border-brand-teal/50 focus:ring-1 focus:ring-brand-teal/50 transition-colors" placeholder="Su nombre">
+              </div>
+              <div>
+                <label class="text-white/50 text-xs font-semibold tracking-wider uppercase block mb-2">Teléfono</label>
+                <input type="tel" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/30 focus:outline-none focus:border-brand-teal/50 focus:ring-1 focus:ring-brand-teal/50 transition-colors" placeholder="(506) XXXX-XXXX">
+              </div>
+            </div>
+            <div>
+              <label class="text-white/50 text-xs font-semibold tracking-wider uppercase block mb-2">Correo Electrónico</label>
+              <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/30 focus:outline-none focus:border-brand-teal/50 focus:ring-1 focus:ring-brand-teal/50 transition-colors" placeholder="correo@ejemplo.com">
+            </div>
+            <div>
+              <label class="text-white/50 text-xs font-semibold tracking-wider uppercase block mb-2">Servicio Requerido</label>
+              <select required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 focus:ring-1 focus:ring-brand-teal/50 transition-colors appearance-none">
+                <option value="" class="bg-brand-navy">Seleccione un servicio</option>
+                <option value="medico" class="bg-brand-navy">Médico General</option>
+                <option value="enfermeria" class="bg-brand-navy">Profesional de Enfermería</option>
+                <option value="asistente" class="bg-brand-navy">Asistente de Pacientes</option>
+                <option value="cuidador" class="bg-brand-navy">Cuidador</option>
+                <option value="adulto-mayor" class="bg-brand-navy">Cuidado de Adulto Mayor</option>
+                <option value="bienestar" class="bg-brand-navy">Bienestar Mental y Emocional</option>
+                <option value="pediatrica" class="bg-brand-navy">Consulta Pediátrica</option>
+                <option value="certificado" class="bg-brand-navy">Certificado Médico</option>
+                <option value="24-7" class="bg-brand-navy">Atención 24/7</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-white/50 text-xs font-semibold tracking-wider uppercase block mb-2">Modalidad</label>
+              <select class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 focus:ring-1 focus:ring-brand-teal/50 transition-colors appearance-none">
+                <option value="" class="bg-brand-navy">Seleccione modalidad</option>
+                <option value="horas" class="bg-brand-navy">Servicio por horas</option>
+                <option value="diario" class="bg-brand-navy">Servicio diario</option>
+                <option value="24-7" class="bg-brand-navy">Servicio 24/7</option>
+                <option value="convenir" class="bg-brand-navy">Horario a convenir</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-white/50 text-xs font-semibold tracking-wider uppercase block mb-2">Mensaje</label>
+              <textarea rows="4" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/30 focus:outline-none focus:border-brand-teal/50 focus:ring-1 focus:ring-brand-teal/50 transition-colors resize-none" placeholder="Cuéntenos sobre el paciente y sus necesidades..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-brand-teal hover:bg-brand-tealdark text-white text-xs font-semibold tracking-wider uppercase px-8 py-4 rounded-xl transition-colors shadow-lg shadow-teal-900/20 flex items-center justify-center gap-2">
+              <i data-lucide="send" class="h-4 w-4"></i>
+              Solicitar Valoración Gratuita
+            </button>
+            <div id="successMsg" class="hidden bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 text-center">
+              <div class="flex items-center justify-center gap-2 text-emerald-400 text-sm font-semibold">
+                <i data-lucide="check-circle" class="h-5 w-5"></i>
+                ¡Solicitud enviada con éxito! Nos comunicaremos pronto para su valoración gratuita.
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-brand-navy border-t border-white/5 py-16 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="h-9 w-9 rounded-full bg-brand-teal flex items-center justify-center">
+              <i data-lucide="heart-pulse" class="h-5 w-5 text-white"></i>
+            </div>
+            <span class="font-display text-white text-xl font-bold tracking-tight uppercase">Enfadi</span>
+          </div>
+          <p class="text-white/50 text-sm leading-relaxed mb-2">Donde el bienestar es nuestra misión.</p>
+          <p class="text-white/40 text-sm leading-relaxed">Servicio integral de salud a domicilio con atención personalizada y profesional.</p>
+          <div class="flex gap-3 mt-6">
+            <a href="#" class="h-10 w-10 rounded-xl bg-white/5 hover:bg-brand-teal flex items-center justify-center transition-colors">
+              <i data-lucide="facebook" class="h-4 w-4 text-white"></i>
+            </a>
+            <a href="https://www.instagram.com/enfadi.cr" target="_blank" class="h-10 w-10 rounded-xl bg-white/5 hover:bg-brand-teal flex items-center justify-center transition-colors">
+              <i data-lucide="instagram" class="h-4 w-4 text-white"></i>
+            </a>
+            <a href="https://wa.me/50671513147" target="_blank" class="h-10 w-10 rounded-xl bg-white/5 hover:bg-brand-teal flex items-center justify-center transition-colors">
+              <i data-lucide="message-circle" class="h-4 w-4 text-white"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-display text-white text-sm font-semibold tracking-wider uppercase mb-4">Servicios</h4>
+          <ul class="space-y-3">
+            <li><a href="#servicios" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Médico General</a></li>
+            <li><a href="#servicios" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Enfermería Domiciliaria</a></li>
+            <li><a href="#servicios" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Asistentes de Pacientes</a></li>
+            <li><a href="#servicios" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Cuidadores</a></li>
+            <li><a href="#adulto-mayor" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Cuidado de Adulto Mayor</a></li>
+            <li><a href="#servicios" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Bienestar Mental</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-white text-sm font-semibold tracking-wider uppercase mb-4">Empresa</h4>
+          <ul class="space-y-3">
+            <li><a href="#nosotros" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Sobre Nosotros</a></li>
+            <li><a href="#equipo" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Nuestro Equipo</a></li>
+            <li><a href="#testimonios" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Testimonios</a></li>
+            <li><a href="#contacto" class="text-white/50 hover:text-brand-teallight text-sm transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display text-white text-sm font-semibold tracking-wider uppercase mb-4">Contacto</h4>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-2 text-white/50 text-sm">
+              <i data-lucide="phone" class="h-4 w-4 text-brand-teallight"></i>
+              (506) 7151-3147
+            </li>
+            <li class="flex items-center gap-2 text-white/50 text-sm">
+              <i data-lucide="phone-call" class="h-4 w-4 text-brand-teallight"></i>
+              8932-9031
+            </li>
+            <li class="flex items-center gap-2 text-white/50 text-sm">
+              <i data-lucide="mail" class="h-4 w-4 text-brand-teallight"></i>
+              info@enfadi.com
+            </li>
+            <li class="flex items-center gap-2 text-white/50 text-sm">
+              <i data-lucide="globe" class="h-4 w-4 text-brand-teallight"></i>
+              enfadi.cr
+            </li>
+            <li class="flex items-center gap-2 text-white/50 text-sm">
+              <i data-lucide="map-pin" class="h-4 w-4 text-brand-teallight"></i>
+              Costa Rica
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-xs">&copy; 2025 ENFADI. Donde el bienestar es nuestra misión.</p>
+        <div class="flex gap-6">
+          <a href="#" class="text-white/30 hover:text-white/60 text-xs transition-colors">Política de Privacidad</a>
+          <a href="#" class="text-white/30 hover:text-white/60 text-xs transition-colors">Términos de Servicio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== WhatsApp FAB ========== -->
+  <a href="https://wa.me/50671513147" target="_blank" class="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-green-500 hover:bg-green-600 flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 group">
+    <i data-lucide="message-circle" class="h-6 w-6 text-white"></i>
+    <span class="absolute right-full mr-3 bg-white text-brand-navy text-xs font-semibold px-3 py-2 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">¡Escríbanos por WhatsApp!</span>
+  </a>
+
+  <script>
+    lucide.createIcons({ attrs: { strokeWidth: 1.5 } });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuOpen = false;
+      });
+    });
+
+    const contactForm = document.getElementById('contactForm');
+    const successMsg = document.getElementById('successMsg');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      successMsg.classList.remove('hidden');
+      contactForm.reset();
+      setTimeout(() => { successMsg.classList.add('hidden'); }, 5000);
+    });
+
+    const navbar = document.querySelector('nav > div');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('bg-brand-navy/95', 'backdrop-blur-md');
+      } else {
+        navbar.classList.remove('bg-brand-navy/95', 'backdrop-blur-md');
+      }
+    });
+
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section > div > .text-center, section > div > .grid').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
